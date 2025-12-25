@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
-
+import controller.PropertyController;
+import model.Property;
 /**
  *
  * @author Ray
@@ -11,12 +12,38 @@ package view;
 public class MainFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
-
+    private final PropertyController controller;
+    private void loadInitialData() {
+    // This connects the View to the Controller logic you just wrote
+    controller.addSampleData(); 
+    
+    // Next, you will write a method to show this data in your JTable
+    // updateTable(); 
+}
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
+        controller = new PropertyController(); 
+        // Load initial data for the Admin Dashboard [cite: 28]
+        loadInitialData();
+        tblProperties.getSelectionModel().addListSelectionListener(e -> {
+        // Only run when the mouse button is released to avoid double-triggering
+        if (!e.getValueIsAdjusting()) { 
+            int row = tblProperties.getSelectedRow();
+            if (row != -1) {
+                txtID.setText(tblProperties.getValueAt(row, 0).toString());
+                txtAddress.setText(tblProperties.getValueAt(row, 1).toString());
+                cmbType.setSelectedItem(tblProperties.getValueAt(row, 2).toString());
+                txtPrice.setText(tblProperties.getValueAt(row, 3).toString());
+                txtYear.setText(tblProperties.getValueAt(row, 4).toString());
+
+                // Lock ID so it stays unique during updates
+                txtID.setEditable(false); 
+            }
+        }
+    });
     }
 
     /**
@@ -28,21 +55,467 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton4 = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        homePanel = new javax.swing.JPanel();
+        headerField = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel3 = new javax.swing.JPanel();
+        txtID = new javax.swing.JTextField();
+        txtAddress = new javax.swing.JTextField();
+        txtPrice = new javax.swing.JTextField();
+        txtYear = new javax.swing.JTextField();
+        cmbType = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnclear = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblProperties = new javax.swing.JTable();
+        txtSearch = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
+        btnSortPrice = new javax.swing.JButton();
+
+        jButton4.setText("ADD");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTabbedPane1.setBackground(new java.awt.Color(204, 255, 102));
+
+        headerField.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        headerField.setForeground(new java.awt.Color(204, 0, 0));
+        headerField.setText("Welcome To JaggaNepal");
+
+        javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
+        homePanel.setLayout(homePanelLayout);
+        homePanelLayout.setHorizontalGroup(
+            homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanelLayout.createSequentialGroup()
+                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(homePanelLayout.createSequentialGroup()
+                        .addGap(220, 220, 220)
+                        .addComponent(headerField))
+                    .addGroup(homePanelLayout.createSequentialGroup()
+                        .addGap(185, 185, 185)
+                        .addComponent(jLabel6)))
+                .addContainerGap(257, Short.MAX_VALUE))
+        );
+        homePanelLayout.setVerticalGroup(
+            homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanelLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(headerField)
+                .addGap(78, 78, 78)
+                .addComponent(jLabel6)
+                .addContainerGap(309, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Home", homePanel);
+
+        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
+
+        jPanel3.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Property Registration", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 0, 0))); // NOI18N
+        jPanel3.setFocusTraversalPolicyProvider(true);
+
+        txtID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIDActionPerformed(evt);
+            }
+        });
+
+        txtAddress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAddressActionPerformed(evt);
+            }
+        });
+
+        txtPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPriceActionPerformed(evt);
+            }
+        });
+
+        txtYear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtYearActionPerformed(evt);
+            }
+        });
+
+        cmbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "House ", "Apartment ", "Land" }));
+        cmbType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTypeActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(204, 255, 102));
+        jButton1.setText("ADD");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setBackground(new java.awt.Color(204, 255, 102));
+        btnUpdate.setText("UPDATE");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setBackground(new java.awt.Color(204, 255, 102));
+        btnDelete.setText("DELETE");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnclear.setBackground(new java.awt.Color(204, 255, 102));
+        btnclear.setText("CLEAR");
+        btnclear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnclearActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Property ID");
+
+        jLabel2.setText("Property Address");
+
+        jLabel3.setText("Property Price");
+
+        jLabel4.setText("Property Type");
+
+        jLabel5.setText("Year Built");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cmbType, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel2)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnclear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))))))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(cmbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(btnUpdate))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnclear)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(60, 60, 60))
+        );
+
+        cmbType.getAccessibleContext().setAccessibleName("");
+
+        tblProperties.setBackground(new java.awt.Color(204, 255, 102));
+        tblProperties.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Address", "Type", "Price", "Year built"
+            }
+        ));
+        jScrollPane2.setViewportView(tblProperties);
+
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
+
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        btnSortPrice.setText("Sort By Price");
+        btnSortPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSortPriceActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(txtSearch)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnSortPrice, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSortPrice)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Admin DashBoard ", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 537, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 754, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 406, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIDActionPerformed
+
+    private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAddressActionPerformed
+
+    private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPriceActionPerformed
+
+    private void txtYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtYearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtYearActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+try {
+        int id = Integer.parseInt(txtID.getText());
+        
+        // --- Unique ID Validation ---
+        if (controller.isIdDuplicate(id)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error: Property ID " + id + " already exists. Please enter a unique ID.", 
+                "Duplicate ID Found", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            return; // Exit the method so the property is NOT added
+        }
+        // ----------------------------
+
+        String address = txtAddress.getText().trim();
+        String type = cmbType.getSelectedItem().toString();
+        double price = Double.parseDouble(txtPrice.getText());
+        int year = Integer.parseInt(txtYear.getText());
+
+        // Basic validation for empty fields
+        if (address.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Address cannot be empty.");
+            return;
+        }
+
+        // Add to system if all checks pass
+        Property newProp = new Property(id, address, type, price, year);
+        controller.addProperty(newProp);
+        
+        updateTable(); // Refresh the UI
+        javax.swing.JOptionPane.showMessageDialog(this, "Property added successfully!");
+
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Please enter valid numbers for ID, Price, and Year.");
+    }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+                                        
+   try {
+        // 1. Get the data from fields
+        int id = Integer.parseInt(txtID.getText());
+        String address = txtAddress.getText();
+        String type = cmbType.getSelectedItem().toString();
+        double price = Double.parseDouble(txtPrice.getText());
+        int year = Integer.parseInt(txtYear.getText());
+
+        // 2. Call the controller to update the data
+        boolean success = controller.updateProperty(id, address, type, price, year);
+        
+        // 3. Keep THIS part here:
+        if (success) {
+            updateTable(); // Refreshes the JTable to show new values
+            javax.swing.JOptionPane.showMessageDialog(this, "Property updated successfully!");
+            clearFields(); // This clears the form and unlocks the ID field
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Update failed. ID not found.");
+        }
+
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Invalid input. Please check your numbers.");
+    }
+  // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        
+    int selectedRow = tblProperties.getSelectedRow();
+    if (selectedRow != -1) {
+        int id = (int) tblProperties.getValueAt(selectedRow, 0);
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(this, "Delete Property ID " + id + "?");
+        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+            controller.deleteProperty(id); // Ensure this method is in PropertyController
+            updateTable(); // Refresh UI
+            clearFields(); // Reset the form
+        }
+    } else {
+        javax.swing.JOptionPane.showMessageDialog(this, "Please select a row to delete.");
+    }           
+
+       // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void btnclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnclearActionPerformed
+        // TODO add your handling code here:
+        clearFields();
+    }//GEN-LAST:event_btnclearActionPerformed
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        String searchTerm = txtSearch.getText();
+    if (searchTerm.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Please enter an ID or Address to search.");
+    }
+    try {
+        // 1. Get the ID from the search text field
+        int searchId = Integer.parseInt(txtSearch.getText());
+
+        // 2. Call the binary search (Ensure the list is sorted by ID first!)
+        model.Property result = controller.binarySearchById(searchId);
+
+        // 3. Show the result to the user
+        if (result != null) {
+            String message = "Property Found!\n" +
+                             "Address: " + result.getAddress() + "\n" +
+                             "Price: " + result.getPrice();
+            javax.swing.JOptionPane.showMessageDialog(this, message);
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Property ID not found.");
+        }
+    } catch (NumberFormatException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Please enter a valid numeric ID.");
+    }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnSortPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSortPriceActionPerformed
+        // 1. Tell the controller to sort the data
+    controller.sortByPrice(true); // 'true' for ascending
+    
+    // 2. Refresh the table so the user sees the new order
+    updateTable();
+    
+    // 3. Optional: Visual feedback
+    javax.swing.JOptionPane.showMessageDialog(this, "Properties sorted by price!");
+    }//GEN-LAST:event_btnSortPriceActionPerformed
+
+    private void cmbTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbTypeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -68,7 +541,73 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new MainFrame().setVisible(true));
     }
+    // 1. Create this helper method in MainFrame
+private void clearFields() {
+    txtID.setText("");
+    txtAddress.setText("");
+    txtPrice.setText("");
+    txtYear.setText("");
+    cmbType.setSelectedIndex(0);
+    txtID.setEditable(true); // Re-enable for new entries
+}
 
+
+
+    private void updateTable() {
+    // 1. Get the list of properties from the controller
+    java.util.List<model.Property> list = controller.getPropertyList();
+
+    // 2. Get the model of your JTable (Ensure your table is named 'tblProperties')
+    javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tblProperties.getModel();
+
+    // 3. Clear existing rows so we don't duplicate data on screen
+    model.setRowCount(0);
+
+    // 4. Loop through the list and add each property to the table
+    for (model.Property p : list) {
+        Object[] row = {
+            p.getPropertyID(),
+            p.getAddress(),
+            p.getType(),
+            p.getPrice(),
+            p.getYearBuilt()
+        };
+        model.addRow(row);
+        
+    }
+}
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnSortPrice;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btnclear;
+    private javax.swing.JComboBox<String> cmbType;
+    private javax.swing.JLabel headerField;
+    private javax.swing.JPanel homePanel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable tblProperties;
+    private javax.swing.JTextField txtAddress;
+    private javax.swing.JTextField txtID;
+    private javax.swing.JTextField txtPrice;
+    private javax.swing.JTextField txtSearch;
+    private javax.swing.JTextField txtYear;
     // End of variables declaration//GEN-END:variables
+
+    private void btnClearActionPerformed(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
