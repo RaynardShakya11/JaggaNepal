@@ -15,10 +15,10 @@ import java.util.List;
  */
 public class PropertyController {
     private final List<Property> propertyList; // List for the Admin Dashboard [cite: 24]
-    private final Queue<Property> recentQueue = null; // Queue for the Carousel [cite: 57]
+    
     public PropertyController() {
         this.propertyList = new ArrayList<>();
-        this.recentQueue = new LinkedList<>();
+      
         // Initialize your ArrayList and Queue here [cite: 24, 57]
     }
     
@@ -112,13 +112,15 @@ public List<Property> getPropertyList() {
 
     public void addProperty(Property property) {
     // Add to the main list for the Admin Dashboard
+    // 1. Add to the main list [cite: 24]
     propertyList.add(property);
     
-    // Maintain the 'Recently Added' Queue (limit to 5)
+    // 2. Add to the Carousel Queue (Keep last 5) [cite: 56, 57]
     if (recentQueue.size() >= 5) {
-        recentQueue.poll(); // Remove the oldest property
+        recentQueue.poll();
     }
-    recentQueue.add(property); // Add the new property
+    recentQueue.add(property);
+
 }
     public boolean deleteProperty(int id) {
     // We use a lambda expression to find and remove the item with the matching ID
